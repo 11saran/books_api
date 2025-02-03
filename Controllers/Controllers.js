@@ -13,9 +13,26 @@ const getAllBooks = (req,res)=>{
     }
 }
 
+//Add new Book
+const addBook = (req,res)=>{
+try {
+    const { name, author, publishedYear } = req.body;
+    const newBook = {
+        id:books.length+1,
+        name,
+        author,
+        publishedYear,
+    };
+    books.push(newBook);
+    res.status(201).json(newBook);
+} catch (error) {
+    return res.status(500).json({ error: "Internal Server Error" });
+}
+}
 
 
 
 module.exports = {
-    getAllBooks
-}
+  getAllBooks,
+  addBook,
+};
