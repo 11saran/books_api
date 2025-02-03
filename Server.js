@@ -1,7 +1,8 @@
 const express =  require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const router  = require('./Routes/Route')
+const router  = require('./Routes/Route');
+const errorHandler = require('./Middleware/errorHandler')
 
 const app = express();
 
@@ -19,3 +20,5 @@ app.listen(PORT,()=>{
 
 
 app.use('/api',router);
+
+app.use(errorHandler);
