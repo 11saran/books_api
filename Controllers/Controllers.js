@@ -45,6 +45,30 @@ const getSingleBook = (req,res)=>{
     }
 }
 
+//Update book
+
+const updateBook = (req,res)=>{
+    try {
+        const bookId = parseInt(req.params.id);
+        const { name, author, publishedYear } = req.body;
+        const bookIndex = books.findIndex((b)=>b.id ===bookId);
+        if (bookIndex === -1) {
+            return res.status(404).json({message:"Book not found"});
+        }
+
+        books[bookIndex]={
+            id:bookId,
+            name,
+            author,
+            publishedYear,
+        }
+
+      res.status(200).json(books[bookIndex]);
+
+    } catch (error) {
+         return res.status(500).json({ error: "Internal Server Error" });
+    }
+}
 
 
 
@@ -53,4 +77,5 @@ module.exports = {
   getAllBooks,
   addBook,
   getSingleBook,
+  updateBook,
 };
