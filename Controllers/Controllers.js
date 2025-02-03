@@ -30,9 +30,27 @@ try {
 }
 }
 
+//Get single book
+const getSingleBook = (req,res)=>{
+    try {
+        const bookId = parseInt(req.params.id);
+        const book = books.find((b)=>b.id === bookId)
+        if (!book) {
+            return res.status(404).json({message:"Book not found"});
+        }res.status(200).json(book);
+
+        
+    } catch (error) {
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+
+
 
 
 module.exports = {
   getAllBooks,
   addBook,
+  getSingleBook,
 };
