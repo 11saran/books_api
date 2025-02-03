@@ -63,13 +63,28 @@ const updateBook = (req,res)=>{
             publishedYear,
         }
 
-      res.status(200).json(books[bookIndex]);
+      res.status(200).json({message:"Book Updated Successfully"});
 
     } catch (error) {
          return res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
+//Delete book
+const deleteBook = (req,res)=>{
+    try {
+        const bookId = parseInt(req.params.id);
+        const bookIndex = books.findIndex((b)=>b.id === bookId);
+        if (bookIndex === -1) {
+            return res.status(404).json({message:"Book not found"});
+            
+        }
+        books.splice(bookIndex,1);
+        res.status(200).json({message:"Book Deleted Successfully"})
+    } catch (error) {
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+}
 
 
 
@@ -78,4 +93,5 @@ module.exports = {
   addBook,
   getSingleBook,
   updateBook,
+  deleteBook,
 };
