@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cors = require("cors");
 const router  = require('./Routes/Route');
 const errorHandler = require('./Middleware/errorHandler')
+const swaggerDocs = require("./swagger");
 
 const app = express();
 
@@ -16,6 +17,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`);
+    swaggerDocs(app);
     
 })
 
